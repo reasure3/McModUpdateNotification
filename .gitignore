@@ -1,0 +1,6 @@
+token.txt
+.env
+# Project exclude paths
+/.gradle/
+/build/
+/build/classes/kotlin/main/
