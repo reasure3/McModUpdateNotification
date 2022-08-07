@@ -262,7 +262,7 @@ enum class ReleaseType(val type: Int) {
 
     companion object {
         private val map = ReleaseType.values().associateBy(ReleaseType::type)
-        operator fun get(value: Int) = map[value] ?: sUNKNOWN
+        operator fun get(value: Int) = map[value] ?: UNKNOWN
         fun get(event: GenericCommandInteractionEvent, default: ReleaseType = ALL) =
             ReleaseType[event.getOption("release_type")?.asInt ?: default.type]
     }
