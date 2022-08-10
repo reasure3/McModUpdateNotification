@@ -14,12 +14,22 @@ import io.github.cdimascio.dotenv.dotenv
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.events.ReadyEvent
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent
+import kotlin.system.exitProcess
 import kotlin.time.Duration.Companion.minutes
 
 fun main(args: Array<String>) {
     val config = dotenv()
-    val token = config["DISCORD_TOKEN"]
-    val key = config["CURSEFORGE_API_KEY"]
+    val token = config["DISCORD_TOKEN"] ?: ""
+    val key = config["CURSEFORGE_API_KEY"] ?: ""
+
+    if (token.isEmpty()) {
+        println("No Discord Token")
+        exitProcess(1)
+    }
+    if (key.isEmpty()) {
+        println("No Curseforge Api Key")
+        exitProcess(1)
+    }
 
     // 봇 생성
     val bot = light(token) { setActivity(Activity.watching("CurseForge")) }
