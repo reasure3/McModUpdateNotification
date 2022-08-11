@@ -213,6 +213,12 @@ fun modEmbed(modInfo: ModInfo, gameVersionFilter: String, loaderFilter: ModLoade
 
             // 필터가 ALL이면 전부 추가
             if (typeFilter == ReleaseType.ALL) {
+                if (releaseFiles.isEmpty() && betaFiles.isEmpty() && alphaFiles.isEmpty()) {
+                    field {
+                        name = "There is no mod files."
+                        value = ":("
+                    }
+                }
                 releaseFiles.forEach { f -> builder.addField(f.name, f.value, true) }
                 betaFiles.forEach { f -> builder.addField(f.name, f.value, true) }
                 alphaFiles.forEach { f -> builder.addField(f.name, f.value, true) }
@@ -223,6 +229,12 @@ fun modEmbed(modInfo: ModInfo, gameVersionFilter: String, loaderFilter: ModLoade
                     betaFiles.forEach { f -> builder.addField(f.name, f.value, true) }
                 } else {
                     alphaFiles.forEach { f -> builder.addField(f.name, f.value, true) }
+                    if (alphaFiles.isEmpty()) {
+                        field {
+                            name = "There is no mod files for $gameVersionFilter"
+                            value = ":("
+                        }
+                    }
                 }
             }
         }
